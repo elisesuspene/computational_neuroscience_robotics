@@ -1,0 +1,38 @@
+| Capteur              | Côté moteur   | Type de synapse |
+| -------------------- | ------------- | --------------- |
+| ps0 (gauche extrême) | moteur gauche | inhibitrice     |
+| ps0                  | moteur droite | excitatrice     |
+| ps1 (gauche)         | moteur gauche | inhibitrice     |
+| ps1                  | moteur droite | excitatrice     |
+| ps2 (centre-gauche)  | moteur gauche | faible inhib.   |
+| ps2                  | moteur droite | faible excit.   |
+| ps3 (centre-droit)   | moteur gauche | faible excit.   |
+| ps3                  | moteur droite | faible inhib.   |
+| ps4 (droite)         | moteur gauche | excitatrice     |
+| ps4                  | moteur droite | inhibitrice     |
+| ps5 (droite extrême) | moteur gauche | excitatrice     |
+| ps5                  | moteur droite | inhibitrice     |
+
+
+on choisit :         self.g = 0.005 # S
+    Is = 6.0 #µA stimulation constante
+lambda_factor = 0.5
+W = 0.5  # fenêtre glissante en secondes
+
+
+
+
+
+Fenêtre W: t - W → t
+|-----|-----|-----|-----|
+  0     1     2     3   ... steps
+
+Spike forward ou right ?
+  1 = spike
+  0 = pas de spike
+
+Somme = Tf + Tr dans la fenêtre
+vr(t) = (1-lambda)*vr(t-1) + lambda*sum
+
+
+Is_sensor = sensor_value * 50

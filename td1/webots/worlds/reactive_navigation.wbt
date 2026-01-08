@@ -1,0 +1,39 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/solids/protos/SolidBox.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation -0.2874547087172433 0.40204770262510536 0.8693258510191444 0.9181456068628515
+  position -0.5651341780007552 -0.7430632081479587 0.5420151250235594
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+}
+E-puck {
+  translation 0.2 0 0
+  rotation 0 1 0 0
+  controller "controlleurLIF"
+}
+SolidBox {
+  translation 0 0 0.05
+  size 0.05 0.05 0.05
+}
+SolidBox {
+  translation 0 0.2 0.05
+  name "box(1)"
+  size 0.05 0.05 0.05
+}
+SolidBox {
+  translation 0.3 -0.03 0.03
+  name "box(2)"
+  size 0.05 0.05 0.05
+}
