@@ -5,6 +5,7 @@
 from controller import Robot
 import numpy as np
 from collections import deque
+import matplotlib.pyplot as plt
 
 # create the Robot instance.
 robot = Robot()
@@ -20,7 +21,7 @@ v_left = 0.0
 v_right = 0.0
 update_dt = timestep / 1000.0  # seconds. pas de temps pour l'actualisation de la valeur du neurone
 integration_dt = 1e-3  # 1 ms. pas de temps pour l'intégration
-Is = 6.0e-6 #A stimulation constante
+Is_const = 6.0e-6 #A stimulation constante
 lam = 0.5 # pour la régression linéaire
 
 # GETDEVICE LIKE FUNCTION
@@ -121,6 +122,12 @@ for i_motor, motor in enumerate(motor_neurons[:2]):  # moteurs gauche/droite
             else:         
                 synapses.append(Synapse(E_syn_i=0.0, first_neuron=sensor, second_neuron=motor))
 
+trace = {
+    "time": [],
+    "sensory": [[] for _ in sensory_neurons],
+    "motor": [[] for _ in motor_neurons]
+}
+
 # MAIN LOOP
 
 # - perform simulation steps until Webots is stopping the controller
@@ -144,7 +151,7 @@ while robot.step(timestep) != -1:
     # UPDATE MOTOR NEURONS
     for motor in motor_neurons:
         for _ in range(int(update_dt / integration_dt)):
-            motor.step(integration_dt, Is)
+            motor.step(integration_dt, Is_const)
 
     # MOTOR COMMANDS
     spike_hist_left = motor_neurons[0].spike_history  # left
@@ -160,6 +167,13 @@ while robot.step(timestep) != -1:
     motor_left.setVelocity(v_left)
     motor_right.setVelocity(v_right)
 
+    # GRAPHIQUE
+    current_time = robot.getTime()
+    trace["time"].append(current_time)
+    for i, n in enumerate(sensory_neurons):
+        trace["sensory"][i].append(n.Vm * 1000)  # en mV
+    for i, n in enumerate(motor_neurons):
+        trace["motor"][i].append(n.Vm * 1000)
         
     pass
 
@@ -170,5 +184,13 @@ for s in sensors:
     s.disable()
 print("Controller stopped, all motors and sensors disabled")
 
-
-# POUR D EVENTUELS TRACES, METTRE LES POTENTIELS EN MV
+# AFFICHAGE GRAPHIQUES
+for i, neuron_trace in enumerate(trace["sensory"]):
+    plt.plot(trace["time"], neuron_trace, label=f"Sensor {i}")
+for i, neuron_trace in enumerate(trace["motor"]):
+    plt.plot(trace["time"], neuron_trace, label=f"Motor {i}", linestyle='--')
+plt.xlabel("Time (s)")
+plt.ylabel("Potentiel membranaire (mV)")
+plt.legend()
+plt.savefig("../../../neurons_activity.png")
+plt.show()
