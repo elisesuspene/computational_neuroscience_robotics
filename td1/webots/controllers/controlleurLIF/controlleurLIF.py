@@ -15,7 +15,7 @@ robot = Robot()
 # get the time step of the current world.
 timestep = int(robot.getBasicTimeStep())
 # Motor parameters
-MAX_SPEED = 6.28 #rad/s
+v_max = 6.28 #rad/s
 # Vitesses initiales des moteurs gauche et droite
 v_left = 0.0 
 v_right = 0.0
@@ -31,10 +31,10 @@ lam = 0.5 # pour la régression linéaire
 #  motor = robot.getDevice('motorname')
 #  ds = robot.getDevice('dsname')
 #  ds.enable(timestep)
-# Sensors: the 6 front IRs of the e-puck
-SENSOR_NAMES = ["ps0", "ps1", "ps2", "ps3", "ps4", "ps5"]
+# Sensors
+sensor_names = ["ps0", "ps1", "ps2", "ps3", "ps4", "ps5"]
 sensors = []
-for name in SENSOR_NAMES:
+for name in sensor_names:
     s = robot.getDevice(name)
     s.enable(timestep)
     sensors.append(s)
@@ -76,7 +76,7 @@ class NeuroneLIF():
         self.t = 0.               # instant
         self.spike = False      # vaut True si le neurone est en spike
         W = 0.5  # fenêtre glissante en secondes
-        self.spike_history = deque([0]*int(W/integration_dt), maxlen=int(W/integration_dt))       # liste de 0 ou 1 représentant les impulsions sur la fenêtre W
+        self.spike_history = deque([0]*int(W/integration_dt), maxlen=int(W/integration_dt))       # liste de 0 ou 1 représentant les impulsions sur la fenêtre W. deque : adapté aux fenêtres glissantes
         self.id = id
 
     def compute_I_syn(self):
@@ -101,9 +101,9 @@ class NeuroneLIF():
                     
 # CREATE NEURONS
 
-# 6 sensory neurons
+# Sensory neurons
 sensory_neurons = [NeuroneLIF(id=f"s{i}") for i in range(6)] # avant-gauche, avant-gauche2, avant-droite2, avant-droite, arrière-droite, arrière-gauche
-# 3 motor neurons
+# Motor neurons
 motor_neurons = [NeuroneLIF(id="ml"), NeuroneLIF(id="mr"), NeuroneLIF(id="mf")]  # L, R, F
 
 # CREATE SYNAPSES
@@ -122,7 +122,8 @@ for i_motor, motor in enumerate(motor_neurons[:2]):  # moteurs gauche/droite
             else:         
                 synapses.append(Synapse(E_syn_i=0.0, first_neuron=sensor, second_neuron=motor))
 
-trace = {
+trace = { 
+    # pour pouvoir tracer les potentiels membranaires plus tard
     "time": [],
     "sensory": [[] for _ in sensory_neurons],
     "motor": [[] for _ in motor_neurons]
@@ -144,7 +145,7 @@ while robot.step(timestep) != -1:
     sensory_outputs = []
     for i, neuron in enumerate(sensory_neurons):
         for _ in range(int(update_dt / integration_dt)):
-            neuron.step(integration_dt, 5e-6*sensor_values[i]) # le courant de stimulation est lié à la détection d'objets par les neurones sensoriels, et de l'ordre du µA
+            neuron.step(integration_dt, 5e-6*sensor_values[i]) # le courant de stimulation est lié à la détection d'objets par les neurones sensoriels
         sensory_outputs.append(neuron.Vm)
     sensory_outputs = np.array(sensory_outputs)
 
@@ -161,13 +162,13 @@ while robot.step(timestep) != -1:
     v_left = (1 - lam) * v_left + lam * (sum(spike_hist_left) + sum(spike_hist_forward)) * update_dt
     # consigne moteur droit
     v_right = (1 - lam) * v_right + lam * (sum(spike_hist_right) + sum(spike_hist_forward)) * update_dt
-    # limiter vitesse
-    v_left  = max(min(v_left, MAX_SPEED), -MAX_SPEED)
-    v_right = max(min(v_right, MAX_SPEED), -MAX_SPEED)
+    # limiter vitesse à v_max
+    v_left  = max(min(v_left, v_max), -v_max)
+    v_right = max(min(v_right, v_max), -v_max)
     motor_left.setVelocity(v_left)
     motor_right.setVelocity(v_right)
 
-    # GRAPHIQUE
+    # STOCKAGE DES DONNEES POUR GRAPHIQUES
     current_time = robot.getTime()
     trace["time"].append(current_time)
     for i, n in enumerate(sensory_neurons):
