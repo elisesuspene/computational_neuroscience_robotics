@@ -1,0 +1,94 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/protos/Nao.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+
+WorldInfo {
+  info [
+    "Aldebaran's Nao H25 V5.0"
+    "NAO is a programmable, 57-cm tall humanoid robot."
+    "The body has 25 degrees of freedom (DOF)."
+    "The sensors include 2 cameras, 4 microphones, sonar rangefinder, 2 IR emitters and receivers, 1 inertial board, and 8 pressure sensors."
+  ]
+  title "Aldebaran's Nao"
+  basicTimeStep 20
+  FPS 20
+  contactProperties [
+    ContactProperties {
+      material1 "NAO foot material"
+      coulombFriction [
+        7
+      ]
+      bounce 0.3
+      bounceVelocity 0.003
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.1992737551579928 0.0632706114231644 -0.9778991769274433 2.539475268655527
+  position 1.59407717097729 1.4728641584232762 1.0483234024268566
+  follow "NAO1"
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+Floor {
+  rotation 0 0 1 1.57079632679
+  size 25 25
+  tileSize 0.8 0.8
+  appearance Parquetry {
+    type "dark strip"
+  }
+}
+DEF NAO1 Nao {
+  translation -0.165356 0.276008 0.334
+  rotation 0 0 1 0.785394
+  name "NAO1"
+  controller "coucou_controller"
+  bodySlot [
+    Receiver {
+      name "receiverNAO1"
+    }
+    Emitter {
+      name "emitterNAO1"
+    }
+  ]
+  leftHandSlot [
+    GPS {
+      name "GPS_left_hand"
+    }
+  ]
+  rightHandSlot [
+    GPS {
+      name "GPS_right_hand"
+    }
+  ]
+}
+DEF NAO2 Nao {
+  translation 0.498645 0.852251 0.334
+  rotation 0 0 1 -2.402005307179586
+  name "NAO2"
+  controller "coucou_controller"
+  bodySlot [
+    Receiver {
+      name "receiverNAO2"
+    }
+    Emitter {
+      name "emitterNAO2"
+    }
+  ]
+  leftHandSlot [
+    GPS {
+      name "GPS_left_hand"
+    }
+  ]
+  rightHandSlot [
+    GPS {
+      name "GPS_right_hand"
+    }
+  ]
+}
