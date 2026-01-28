@@ -18,7 +18,7 @@ TexturedBackgroundLight {
 NaoRoom {
 }
 Nao {
-  controller "coucou_controller_elise_suspene"
+  controller "coucou_controller_elise_suspene2"
   bodySlot [
     Receiver {
       name "receiverNAO"
@@ -41,7 +41,7 @@ Nao {
 Nao {
   translation 0.9 0 0.434
   name "NAO1"
-  controller "coucou_controller_elise_suspene"
+  controller "coucou_controller_elise_suspene2"
   bodySlot [
     Receiver {
       name "receiverNAO1"
