@@ -9,7 +9,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.08028001184987503 0.028435427765899145 0.9963666725383554 2.463087159143177
-  position 3.5819680710821404 -2.4451982441748212 1.5911942608218608
+  position 4.30114021152369 -3.027708873865376 1.7413079095707413
 }
 TexturedBackground {
 }
@@ -18,10 +18,10 @@ TexturedBackgroundLight {
 NaoRoom {
 }
 Nao {
-  controller "coucou_controller"
+  controller "coucou_controller_elise_suspene"
 }
 Nao {
   translation 0.9 0 0.434
   name "NAO(1)"
-  controller "coucou_controller"
+  controller "coucou_controller_elise_suspene"
 }

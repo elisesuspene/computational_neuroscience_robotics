@@ -1,7 +1,8 @@
 """coucou_controller controller."""
 
 # You may need to import some classes of the controller module. Ex:
-#  from controller import Robot, Motor, DistanceSensorfrom controller import Robot, Emitter, Receiver
+from controller import Robot, Motor, DistanceSensor
+from controller import Robot, Emitter, Receiver
 import matplotlib.pyplot as plt
 import numpy as np
 
