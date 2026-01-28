@@ -9,6 +9,10 @@ import numpy as np
 class Nao(Robot):
     def __init__(self):
         Robot.__init__(self)
+
+        print("DEBUG controller file:", __file__)
+        print("DEBUG robot name:", self.getName())
+
         self.simStepInMS = int(self.getBasicTimeStep())
         self.dt = self.simStepInMS / 1000.0
         # Actionneurs 
@@ -21,8 +25,8 @@ class Nao(Robot):
         self.LElbowYaw = self.getDevice("LElbowYaw")
         self.LElbowRoll = self.getDevice("LElbowRoll")
         # Dispositifs pour l’envoi/réception de données
-        self.emitter = self.getDevice("emitter{}".format(self.getName()))
-        self.receiver = self.getDevice("receiver{}".format(self.getName()))
+        self.emitter = self.getDevice("emitter")
+        self.receiver = self.getDevice("receiver")
         self.receiver.enable(self.simStepInMS)
         # Capteurs 
         self.RShoulderPitch_S = self.getDevice("RShoulderPitchS")
@@ -70,6 +74,7 @@ class Nao(Robot):
             self.LElbowRoll_0 = -0.972053
             self.LElbowYaw_0 = 0.0
 
+        return
         self.LShoulderPitch.setPosition(self.LShoulderPitch_0)
         self.LShoulderRoll.setPosition(self.LShoulderRoll_0)
         self.LElbowRoll.setPosition(self.LElbowRoll_0)
@@ -141,6 +146,9 @@ while robot.step(robot.simStepInMS) != -1 and t < T:
     # vitesse x de l'effecteur
     d_gps_hand = (otherGPS[0] - otherGPS_t_1[0]) / dt
     d_hand_x.append(d_gps_hand)
+    #Is=d_hand_x pour l'épaule, 0 sinon
+    #Isyn=0
+    #gej != 0 une seule synapse électrique d'un nerone vers le deuxième. copier le modèle
 
     V_shoulder = d_gps_hand
     V_elbow += dt * g_ej * (V_shoulder - V_elbow)
@@ -148,8 +156,9 @@ while robot.step(robot.simStepInMS) != -1 and t < T:
     phi_shoulder = V_shoulder + robot.theta_ShoulderRoll
     phi_elbow = V_elbow + robot.theta_ELbowRoll
 
+    print(phi_shoulder, phi_elbow, flush=True)
     # mouvement du bras concerné selon le robot
-    robot.wave(phi_shoulder, phi_elbow)
+    #robot.wave(phi_shoulder, phi_elbow)
 
     times.append(t)
     t += dt

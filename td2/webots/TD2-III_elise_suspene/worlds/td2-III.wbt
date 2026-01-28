@@ -19,9 +19,45 @@ NaoRoom {
 }
 Nao {
   controller "coucou_controller_elise_suspene"
+  bodySlot [
+    Receiver {
+      name "receiverNAO"
+    }
+    Emitter {
+      name "emitterNAO"
+    }
+  ]
+  leftHandSlot [
+    GPS {
+      name "GPS_left_hand"
+    }
+  ]
+  rightHandSlot [
+    GPS {
+      name "GPS_right_hand"
+    }
+  ]
 }
 Nao {
   translation 0.9 0 0.434
-  name "NAO(1)"
+  name "NAO1"
   controller "coucou_controller_elise_suspene"
+  bodySlot [
+    Receiver {
+      name "receiverNAO1"
+    }
+    Emitter {
+      name "emitterNAO1"
+    }
+  ]
+  leftHandSlot [
+    GPS {
+      name "GPS_left_hand"
+    }
+  ]
+  rightHandSlot [
+    GPS {
+      name "GPS_right_hand"
+    }
+  ]
 }
