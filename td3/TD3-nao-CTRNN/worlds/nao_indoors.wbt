@@ -1,0 +1,220 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/floors/protos/Floor.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Ceiling.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/protos/Nao.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Wall.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Door.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/DoorLever.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/apartment_structure/protos/Window.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/lights/protos/CeilingLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/lights/protos/FloorLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/tables/protos/Desk.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/chairs/protos/WoodenChair.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/school_furniture/protos/Book.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/tables/protos/Table.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/living_room_furniture/protos/Armchair.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/living_room_furniture/protos/Sofa.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/living_room_furniture/protos/Carpet.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/plants/protos/BunchOfSunFlowers.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/drinks/protos/Can.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/plants/protos/PottedTree.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/objects/paintings/protos/PortraitPainting.proto"
+
+WorldInfo {
+  info [
+    "Aldebaran's Nao H25 V5.0"
+  ]
+  title "Nao Indoors"
+  basicTimeStep 100
+  FPS 20
+  contactProperties [
+    ContactProperties {
+      material1 "Nao foot material"
+      coulombFriction [
+        8.24
+      ]
+      bounce 0.9
+      bounceVelocity 0.003
+    }
+  ]
+}
+Viewpoint {
+  orientation 0.04790337473355212 -0.3090487320459639 -0.9498390115750769 5.959601352906394
+  position -4.238194335957821 -3.5662498344574147 0.659298117122167
+  follow "NAO"
+}
+Background {
+  backUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_side.png"
+  ]
+  bottomUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_bottom.png"
+  ]
+  frontUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_side.png"
+  ]
+  leftUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_side.png"
+  ]
+  rightUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_side.png"
+  ]
+  topUrl [
+    "https://raw.githubusercontent.com/cyberbotics/webots/R2023b/projects/robots/softbank/nao/worlds/textures/cubic/brown_floor_top.png"
+  ]
+}
+Floor {
+  translation -1.4 -1.7 0
+  size 6.6 6.6
+  tileSize 1 1
+  appearance Parquetry {
+  }
+}
+Ceiling {
+  translation -1.4 -1.7 2.4
+  size 6.6 6.6
+}
+Nao {
+  hidden rotation_22 0 1 0 0.9599999969980207
+  hidden rotation_24 0 1 0 0.9599999993338296
+  hidden rotation_25 0 1 0 0.9599999972133426
+  hidden rotation_27 0 1 0 0.9599999993340209
+  hidden rotation_29 0 -1 0 0.9599999994385737
+  hidden rotation_34 0 1 0 0.960000001518171
+  hidden rotation_36 0 1 0 0.9599999991050946
+  hidden rotation_37 0 0.9999999999999999 0 0.9600000015195799
+  hidden rotation_39 0 1 0 0.9599999991058351
+  translation -2.69149 -2.98527 0.329653
+  rotation -4.482489542175661e-09 -0.0004519649538380281 0.9999998978638349 3.14159
+  controller "my_controller"
+}
+Wall {
+  translation 2 1 0
+  size 0.2 1.2 2.4
+}
+Wall {
+  translation 2 -2.8 0
+  name "wall(1)"
+  size 0.2 4.4 2.4
+}
+Wall {
+  translation -2.55 1.7 0
+  rotation 0 0 1 4.71239
+  name "wall(2)"
+  size 0.2 4.7 2.4
+}
+Wall {
+  translation -4.8 -1.7 0
+  name "wall(3)"
+  size 0.2 6.6 2.4
+}
+Wall {
+  translation 1.4 -5.1 0
+  rotation 0 0 1 1.5708
+  name "wall(4)"
+  size 0.2 1.4 2.4
+}
+Wall {
+  translation -3.1 -5.1 0
+  rotation 0 0 1 1.5708
+  name "wall(5)"
+  size 0.2 3.6 2.4
+}
+Wall {
+  translation 1.45 1.7 0
+  rotation 0 0 1 1.5708
+  name "wall(6)"
+  size 0.2 1.3 2.4
+}
+Door {
+  translation 2 -0.1 0
+  rotation 0 0 1 3.14159
+  canBeOpen FALSE
+  doorHandle DoorLever {
+    hasStaticParent TRUE
+  }
+}
+Door {
+  translation 0.3 1.7 0
+  rotation 0 0 1 4.71239
+  name "door(1)"
+  canBeOpen FALSE
+  doorHandle DoorLever {
+    hasStaticParent TRUE
+  }
+}
+Window {
+  translation -0.3 -5.1 0
+  rotation 0 0 1 1.5708
+  size 0.2 2 2.4
+}
+CeilingLight {
+  translation -1 -2.5 2.4
+  pointLightColor 1 1 0.9411764705882353
+  pointLightIntensity 2
+}
+FloorLight {
+  translation -4 -4.3 0
+  pointLightIntensity 6
+}
+Desk {
+  translation -3 -4.5 0
+  rotation 0 0 1 1.5708
+}
+WoodenChair {
+  translation -2.8499999998674252 -4.099999749010275 -0.00288849741963898
+  rotation 0.0002499193662565575 0.0002496558377902028 -0.9999999376061345 1.5707953695237102
+  physics Physics {
+    centerOfMass [
+      0 0 0.45
+    ]
+  }
+}
+Book {
+  translation -3.2000851323136645 -4.500070328164908 0.00928054327298088
+  rotation 0.4760559257167451 -0.7394091353650484 0.4760723538798324 1.868032044268712
+}
+Table {
+  translation -0.8 -2.5 0.02
+  size 0.8 1.2 0.53
+}
+Armchair {
+  translation -2.2 -1.2 0
+  rotation 0 0 -1 0.73511
+}
+Sofa {
+  translation -1 -4.2 0
+  rotation 0 0 1 1.5708
+}
+Sofa {
+  translation 1 -2.5 0
+  rotation 0 0 1 3.14159
+  name "sofa(1)"
+}
+Carpet {
+  translation -0.9 -2.5 -0.015
+  rotation 0 0 1 1.5708
+}
+BunchOfSunFlowers {
+  translation 1 -1.1 0
+  rotation 0 0 1 3.14159
+}
+Book {
+  translation -2.700086472791776 -4.610070032296384 0.009280701689394976
+  rotation 0.24734539014196488 -0.9368073181947179 0.24741120943146466 1.6358752156029122
+  name "book(1)"
+}
+Can {
+  translation -0.7800000000000016 -2.3000000000000034 -0.030695075180278048
+  rotation -1.1409360762715178e-13 1.7793445387189517e-13 1 1.8466800000000512
+}
+PottedTree {
+  translation -3.5 1 0
+  rotation 0 0 1 3.14159
+}
+PortraitPainting {
+  translation 1.73 -2.53 1.6
+  rotation 0 0 1 3.14159
+}
