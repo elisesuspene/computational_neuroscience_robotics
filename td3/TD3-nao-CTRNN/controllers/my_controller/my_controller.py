@@ -124,7 +124,7 @@ times = []
 
 nPrimitives = 3
 s_values = [0.1, 0.5, 0.9]
-robot.model.eval()
+robot.ctrnn_model.eval()
 
 for pId in range(nPrimitives):
 
